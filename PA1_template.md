@@ -65,7 +65,7 @@ Generate a histogram to show the distribution of steps taken on each day.
 
 ```r
 hist(dfDaily$steps, breaks = 25, col = "blue", 
-     main = "Histogram for the daily number of steps \n (exluding NA values)", 
+     main = "Histogram for the daily number of steps \n (excluding NA values)", 
      xlab = "Total number of steps"
      )
 ```
@@ -91,6 +91,7 @@ Using the dfInterval dataset created above it possible to generate a time series
 # Plot average daily patterns using the dfInterval summary dataset
 # As the steps column in dfInterval is a list extract the meanSteps vector for this analysis
 plot(dfInterval$intervalTime, dfInterval$steps[, "meanSteps"], type = "l", 
+     main = "Average daily activity pattern",
      xlab = "Interval",
      ylab = "Average number of steps"
      )
@@ -106,7 +107,7 @@ maxInterval <- dfInterval$interval[which.max(dfInterval$steps)]
 maxIntervalTime <- strftime(dfInterval$intervalTime[which.max(dfInterval$steps)], format = "%R %p")
 ```
 
-The 5-minune interval that contains on average the maximum number of steps is 835 (08:35 AM).  
+The 5-minute interval that contains on average the maximum number of steps is 835 (08:35 AM).  
 
 ## Imputing missing values
 
@@ -119,7 +120,7 @@ cntStepsNAs <- sum(is.na(df$steps))
 
 In total there are 2304 observations where the steps value is NA.  
 
-We will then replace all the missing steps obserations with that of the average number of steps for that interval acros the whole period. 
+We will then replace all the missing steps observations with that of the average number of steps for that interval (averaged across the whole period). 
 
 
 
@@ -159,7 +160,7 @@ hist(dfDailyImputed$steps, breaks = 25, col = "blue",
 
 ![plot of chunk plotImputedDailyTotals](figure/plotImputedDailyTotals.png) 
 
-Replacing mean values with those of the average means that the the mean should remain largely the same.
+Replacing missing values with those of the average means that the the mean should remain largely the same.
 
 
 ```r
